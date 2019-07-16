@@ -6,14 +6,21 @@ public class move_player1 : MonoBehaviour {
 	Rigidbody rbPlayer;
 	public float velocidad=20;
 	public float rechazo;
+	float rcastLength;
 	public int vidas;
 	Vector3 vel=new Vector3(0,0,0);
 	RaycastHit hit;
 	public LayerMask lmask;
 	bool mover;
+
+	public AudioClip runningEngine,idle;
+	AudioSource audios;
+
 	// Use this for initialization
 	void Start () {
 		rbPlayer=gameObject.GetComponent<Rigidbody>();
+		audios=gameObject.GetComponent<AudioSource>();
+		rcastLength=(gameObject.GetComponent<Collider>().bounds.size.y)/2.0f;
 	}
 
 	// Update is called once per frame
@@ -21,20 +28,31 @@ public class move_player1 : MonoBehaviour {
 		getSuelo();
 		if (mover) {
 			vel.z=Input.GetAxis("Vertical")*Time.deltaTime*velocidad;//MOVIMIENTO VERTICAL
-			if (vel.z >0.0) {
-				transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
-			}
-			else if (vel.z<0.0) {
-				transform.Rotate(0,-Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+
+			if (vel.z !=0.0f) {
+				if (vel.z >0.0) {
+					transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+				}
+				else{
+					transform.Rotate(0,-Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+				}
+				// reproducirAudio(runningEngine);
 			}
 			else{
 				transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad/2*Time.deltaTime,0);//ROTAR
+				// reproducirAudio(idle);
 			}
 		}
 		rbPlayer.angularVelocity=Vector3.zero;
 		vel.y= rbPlayer.velocity.y;//RE-SET VELOCIDAD EN Y (POST-SALTO)
 		rbPlayer.velocity=transform.forward * vel.z + Vector3.up * vel.y;
 	}
+
+	void reproducirAudio(AudioClip clip){
+			audios.clip=clip;
+			audios.Play();
+	}
+
 	void respawn(){
 		rbPlayer.velocity=Vector3.zero;
 		float rango=3.5f;
@@ -44,7 +62,7 @@ public class move_player1 : MonoBehaviour {
 	}
 
 	void getSuelo(){
-		bool vector= Physics.Raycast(transform.position, Vector3.down,(4.3f/2f)+0.1f,lmask);
+		bool vector= Physics.Raycast(transform.position, Vector3.down,rcastLength+0.2f,lmask);
 		if (vector) {
 			mover=true;
 		}
@@ -73,16 +91,20 @@ public class move_player1 : MonoBehaviour {
 		if (c.gameObject.name!="Plane") {
 			foreach (ContactPoint contact in c.contacts)
 			{
-				print(contact.thisCollider.name + " hit " + contact.otherCollider.name);
-				// Debug.Log("normal:"+contact.normal);
-				// Debug.Log("punto_contacto:"+contact.point);
-				// Debug.Log("velocidad:"+rbPlayer.velocity);
-				// Debug.Log("Forward:"+transform.forward);
+				// print(contact.thisCollider.tag + " hit " + contact.otherCollider.tag);
+				Vector3 otherVel=c.rigidbody.velocity;
+				Debug.Log(c.gameObject.name+";velocidad: "+otherVel.magnitude);
+				Vector3 fuerza=Vector3.zero;
+				if (contact.thisCollider.tag == "axis0") {
+					fuerza=Mathf.Pow(otherVel.magnitude,1)*-transform.forward*0.5f;
+				}
+				else if(contact.thisCollider.tag == "axis1"){
+					fuerza=Mathf.Pow(otherVel.magnitude,1)*c.transform.forward;
+				}
+				rbPlayer.AddForce(fuerza*rechazo,ForceMode.Impulse);
+				// llamar_Inmovilidad();
+				// StartCoroutine(inmovil());
 			}
-			Vector3 otherVel=c.rigidbody.velocity;
-			Vector3 fuerza=Mathf.Pow(otherVel.magnitude,2)*transform.forward;
-			rbPlayer.AddForce(fuerza*-rechazo,ForceMode.Impulse);
-			llamar_Inmovilidad();
 		}
 	}
 

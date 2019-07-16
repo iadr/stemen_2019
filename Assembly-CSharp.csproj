@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\gamemanager.cs" />
-     <Compile Include="Assets\move_p2.cs" />
      <Compile Include="Assets\move_player1.cs" />
      <None Include="Assets\VoxelCars\Readme.txt" />
  <Reference Include="Cinemachine">
