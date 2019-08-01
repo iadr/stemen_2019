@@ -20,15 +20,19 @@ public class move_player1 : MonoBehaviour {
 	void Update () {
 		getSuelo();
 		if (mover) {
-			vel.z=Input.GetAxis("Vertical")*Time.deltaTime*velocidad;//MOVIMIENTO VERTICAL
+			//vel.z=Input.GetAxis("Vertical")*Time.deltaTime*velocidad;//MOVIMIENTO VERTICAL
+			vel.z=Input.GetAxis("Joy1Y")*Time.deltaTime*velocidad;
 			if (vel.z >0.0) {
-				transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+				//transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+				transform.Rotate(0,Input.GetAxis("Joy1X")*velocidad*Time.deltaTime,0);
 			}
 			else if (vel.z<0.0) {
-				transform.Rotate(0,-Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+				//transform.Rotate(0,-Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+				transform.Rotate(0,-Input.GetAxis("Joy1X")*velocidad*Time.deltaTime,0);
 			}
 			else{
-				transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad/2*Time.deltaTime,0);//ROTAR
+				//transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad/2*Time.deltaTime,0);//ROTAR
+				transform.Rotate(0,Input.GetAxis("Joy1X")*velocidad/2*Time.deltaTime,0);
 			}
 		}
 		rbPlayer.angularVelocity=Vector3.zero;
