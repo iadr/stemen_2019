@@ -57,7 +57,6 @@ public class move_player1 : MonoBehaviour {
 		rbPlayer.velocity=Vector3.zero;
 		float rango=3.5f;
 		transform.position= new Vector3(Random.Range(-rango, rango), 0.255f, Random.Range(-rango, rango));//x=z=-3.5 ~ 3.5 , y=0.255
-		// transform.rotation = Random.rotationUniform;
 		transform.Rotate(0.0f,Random.Range(0, 360), 0.0f);
 	}
 
