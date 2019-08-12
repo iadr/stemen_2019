@@ -1627,7 +1627,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 947848348}
-  m_LocalRotation: {x: 0.25977322, y: -0.0015097942, z: 0.005612439, w: 0.9656522}
+  m_LocalRotation: {x: 0.2597732, y: -0.0015098231, z: 0.005612447, w: 0.96565217}
   m_LocalPosition: {x: 0.097626686, y: 5.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1719,6 +1719,52 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 948710970}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1004169146
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.02613634
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.335
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.04684089
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000081460335
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912333514623324, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4ec1340b29e800b448acf8adeff52ace, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!4 &1018529215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400010, guid: a9cc99afcecaa3145a4bd93adf85a113,
@@ -1782,7 +1828,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1053468300}
-  m_LocalRotation: {x: -0, y: 0.000000025262125, z: 0.005811966, w: 0.9999832}
+  m_LocalRotation: {x: -0.000000059604645, y: -6.984918e-10, z: 0.005811981, w: 0.99998313}
   m_LocalPosition: {x: 0, y: 0, z: -11.560277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2061,7 +2107,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2177,7 +2223,7 @@ MonoBehaviour:
   lmask:
     serializedVersion: 2
     m_Bits: 512
-  velForce: 10
+  velForce: 2
   runningEngine: {fileID: 8300000, guid: 1206a7b06267e2d42b3c433446b6bf1a, type: 3}
   idle: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
 --- !u!136 &1227555275
@@ -2387,7 +2433,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2503,7 +2549,7 @@ MonoBehaviour:
   lmask:
     serializedVersion: 2
     m_Bits: 512
-  velForce: 10
+  velForce: 2
   runningEngine: {fileID: 8300000, guid: 1206a7b06267e2d42b3c433446b6bf1a, type: 3}
   idle: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
 --- !u!136 &1408239461
@@ -2923,7 +2969,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3039,7 +3085,7 @@ MonoBehaviour:
   lmask:
     serializedVersion: 2
     m_Bits: 512
-  velForce: 10
+  velForce: 2
   runningEngine: {fileID: 8300000, guid: 1206a7b06267e2d42b3c433446b6bf1a, type: 3}
   idle: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
 --- !u!136 &1899091622
@@ -3121,7 +3167,7 @@ MonoBehaviour:
   lmask:
     serializedVersion: 2
     m_Bits: 512
-  velForce: 10
+  velForce: 2
   runningEngine: {fileID: 8300000, guid: 1206a7b06267e2d42b3c433446b6bf1a, type: 3}
   idle: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
 --- !u!136 &1916156518
@@ -3163,7 +3209,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1805253c06c666c48abf3115cfd2228c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0

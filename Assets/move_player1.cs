@@ -12,6 +12,8 @@ public class move_player1 : MonoBehaviour {
 	RaycastHit hit;
 	public LayerMask lmask;
 	bool mover;
+	// bool isMoving=false;
+	bool playingEngine=false;
 	public float velForce=10	;
 	string nombre,joyX,joyY;
 
@@ -33,19 +35,29 @@ public class move_player1 : MonoBehaviour {
 	void Update () {
 		getSuelo();
 		if (mover) {
-		  //vel.z=Input.GetAxis("Vertical")*Time.deltaTime*velocidad;//MOVIMIENTO VERTICAL
-		  vel.z=Input.GetAxis(joyY)*Time.deltaTime*velocidad;
-		  if (vel.z >0.0) {
-		    //transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
-		    transform.Rotate(0,Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
-		  }
-		  else if (vel.z<0.0) {
-		    //transform.Rotate(0,-Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
-		    transform.Rotate(0,-Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
+		  vel.z=Input.GetAxis("Vertical")*Time.deltaTime*velocidad;//MOVIMIENTO VERTICAL
+		  //vel.z=Input.GetAxis(joyY)*Time.deltaTime*velocidad;
+		  if (vel.z !=0.0) {
+				if (vel.z>0.0) {
+					transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+					// transform.Rotate(0,Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
+				}
+			  else {
+			    transform.Rotate(0,-Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
+			    // transform.Rotate(0,-Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
+				}
+				if (!playingEngine) {
+					playingEngine=true;
+					reproducirAudio(runningEngine);
+				}
 		  }
 		  else{
 		    //transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad/2*Time.deltaTime,0);//ROTAR
 		    transform.Rotate(0,Input.GetAxis(joyX)*velocidad/2*Time.deltaTime,0);
+				if (playingEngine) {
+					playingEngine=false;
+					reproducirAudio(idle);
+				}
 		  }
 		}
 		rbPlayer.angularVelocity=Vector3.zero;
@@ -102,10 +114,15 @@ public class move_player1 : MonoBehaviour {
 				if (contact.thisCollider.tag == "axis0") {
 					fuerza=Mathf.Pow(velForce,1)*-transform.forward*0.5f;
 				}
+				else if (contact.thisCollider.tag== "axis1" && contact.otherCollider.tag== "axis1") {
+					fuerza=0*transform.forward;
+
+				}
 				else if(contact.thisCollider.tag == "axis1"){
 					fuerza=Mathf.Pow(velForce,1)*c.transform.forward;
 				}
-				rbPlayer.AddForce(fuerza*rechazo,ForceMode.Impulse);
+				rbPlayer.velocity=Vector3.zero;
+				rbPlayer.AddForce(fuerza*rechazo+Vector3.forward,ForceMode.Impulse);
 				// llamar_Inmovilidad();
 				// StartCoroutine(inmovil());
 
