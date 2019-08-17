@@ -3,28 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class move_player1 : MonoBehaviour {
+
 	Rigidbody rbPlayer;
+	string nombre,joyX,joyY;
+
+	[Header("Platform",order=0)]
+	float rango=3.5f;
+	public float limite=5.05f;
+
+	[Header("Player",order=1)]
 	public float velocidad=20;
-	public float rechazo;
+	public int vidas=0;
+	public float fuerzaGolpe;
+	public bool puedeMover=true;
+	public bool mover=true;
 	float rcastLength;
-	public int vidas;
 	Vector3 vel=new Vector3(0,0,0);
 	RaycastHit hit;
 	public LayerMask lmask;
-	bool mover;
-	// bool isMoving=false;
-	bool playingEngine=false;
-	public float velForce=10	;
-	string nombre,joyX,joyY;
 
+	[Header("Audio",order=2)]
+	bool playingEngine=false;
 	public AudioClip runningEngine,idle;
 	AudioSource audios;
+
+
+
+
+
 
 	// Use this for initialization
 	void Start () {
 		rbPlayer=gameObject.GetComponent<Rigidbody>();
 		audios=gameObject.GetComponent<AudioSource>();
 		rcastLength=(gameObject.GetComponent<Collider>().bounds.size.y)/2.0f;
+		// Debug.Log(rcastLength);
 		nombre=gameObject.name;
 		nombre=nombre.Substring(1);
 		joyX="Joy"+nombre+"X";
@@ -32,22 +45,20 @@ public class move_player1 : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+		if(!puedeMover)
+				return;
 		getSuelo();
-		if (mover) {
-			// Debug.Log("F: "+transform.forward);
-			// Debug.Log("B: "+ -transform.forward);
-			// Debug.Log("V: "+rbPlayer.velocity);
-		  // vel.z=Input.GetAxis("Vertical")*Time.deltaTime*velocidad;//MOVIMIENTO VERTICAL
+		if (!mover)
+			return;
+
 		  vel.z=Input.GetAxis(joyY)*Time.deltaTime*velocidad;
-		  if (vel.z !=0.0) {
-				if (vel.z>0.0) {
-					transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
-					// transform.Rotate(0,Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
+		  if (vel.z !=0.0f) {
+				if (vel.z>0.0f) {
+					transform.Rotate(0,Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
 				}
 			  else {
-			    transform.Rotate(0,-Input.GetAxis("Horizontal")*velocidad*Time.deltaTime,0);//ROTAR
-			    // transform.Rotate(0,-Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
+			    transform.Rotate(0,-Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
 				}
 				if (!playingEngine) {
 					playingEngine=true;
@@ -55,95 +66,103 @@ public class move_player1 : MonoBehaviour {
 				}
 		  }
 		  else{
-		    //transform.Rotate(0,Input.GetAxis("Horizontal")*velocidad/2*Time.deltaTime,0);//ROTAR
 		    transform.Rotate(0,Input.GetAxis(joyX)*velocidad/2*Time.deltaTime,0);
+				// rbPlayer.AddTorque(Input.GetAxis(joyX)*velocidad/2*Time.deltaTime*transform.up);
 				if (playingEngine) {
 					playingEngine=false;
 					reproducirAudio(idle);
 				}
 		  }
-		}
-		rbPlayer.angularVelocity=Vector3.zero;
-		vel.y= rbPlayer.velocity.y;//RE-SET VELOCIDAD EN Y (POST-SALTO)
-		rbPlayer.velocity=transform.forward * vel.z + Vector3.up * vel.y;
+			// Debug.Log("velocidad Z: "+vel.z);
+			// Debug.Log("joyY: "+ Input.GetAxis(joyY));
+		rbPlayer.velocity=transform.forward * vel.z ;//+ Vector3.up * vel.y;
+
 	}
+
+
 
 	void reproducirAudio(AudioClip clip){
 			audios.clip=clip;
 			audios.Play();
 	}
 
-	void respawn(){
+
+
+	IEnumerator respawn(){
 		rbPlayer.velocity=Vector3.zero;
-		float rango=3.5f;
-		transform.position= new Vector3(Random.Range(-rango, rango), 0.255f, Random.Range(-rango, rango));//x=z=-3.5 ~ 3.5 , y=0.255
+		transform.position= new Vector3(0.0f, 100f, 0.0f);//x=z=-3.5 ~ 3.5 , y=0.255
+		yield return new WaitForSeconds(0.5f);
+		transform.position= new Vector3(Random.Range(-rango, rango), rcastLength+0.1f, Random.Range(-rango, rango));//x=z=-3.5 ~ 3.5 , y=0.255
 		transform.Rotate(0.0f,Random.Range(0, 360), 0.0f);
 	}
 
+
+
 	void getSuelo(){
-		bool vector= Physics.Raycast(transform.position, Vector3.down,rcastLength+0.2f,lmask);
-		if (vector) {
+		if (Physics.Raycast(transform.position, Vector3.down,rcastLength+0.2f,lmask)) {
 			mover=true;
 		}
 		else{
 			mover=false;
 		}
-		if (transform.position.y<-0.2f || Mathf.Abs(transform.position.x)>6.0f) {
+		if (transform.position.y<-0.2f || Mathf.Abs(transform.position.x)>limite || Mathf.Abs(transform.position.z)>limite) {
 			vidas--;
-			respawn();
+			if (!(vidas==0)) {
+				StartCoroutine(respawn());
+			}
 		}
 	}
-	IEnumerator inmovil()
-	{
-		mover=false;
-		yield return new WaitForSeconds(2f);
-		mover=true;
+
+
+	IEnumerator inmovil(){
+		yield return new WaitForSeconds(0.5f);
+		puedeMover=true;
 	}
 
-	public void llamar_Inmovilidad(){
-		StartCoroutine(inmovil());
-	}
+//codigo nico
+// void OnCollisionEnter(Collision collision){
+// 		if(collision.collider.tag == "Player"){
+// 				Vector3 contactPoint = collision.contacts[0].point - transform.position;
+// 				Debug.Log("collision: "+contactPoint);
+// 				rb.AddForce(-contactPoint.normalized * 5 + transform.up, ForceMode.VelocityChange);
+// 				canCheckPiso = false;
+// 				StartCoroutine(delayPiso());
+// 		}
+// }
 
-
+//codigo mio
 	void OnCollisionEnter(Collision c){
 		//aplicar el transform(forward) del que pega por la velocidad del golpeado
-		Vector3 vectorSalto=Vector3.zero;
-		if (c.gameObject.name!="Plane") {
-			foreach (ContactPoint contact in c.contacts)
-			{
-				print(contact.thisCollider.tag + " hit " + contact.otherCollider.tag);
-				Vector3 otherVel=c.rigidbody.velocity;
-				Debug.Log(c.gameObject.name+";velocidad: "+otherVel.magnitude);
-				Vector3 fuerza=Vector3.zero;
-				if (contact.thisCollider.tag == "axis0") {
-					fuerza=Mathf.Pow(velForce,1)*-transform.forward*0.5f;
-				}
-				else if (contact.thisCollider.tag== "axis1" && contact.otherCollider.tag== "axis1") {
-					fuerza=0*transform.forward;
-
-				}
-				else if(contact.thisCollider.tag == "axis1"){
-					fuerza=Mathf.Pow(velForce,1)*c.transform.forward;
-				}
-				rbPlayer.velocity=Vector3.zero;
-				rbPlayer.AddForce(fuerza*rechazo+Vector3.forward,ForceMode.Impulse);
-				// llamar_Inmovilidad();
-				// StartCoroutine(inmovil());
-			//
-			// 	if (contact.thisCollider.tag=="axis1" && contact.otherCollider.tag!="axis1") {
-			// 		if (contact.otherCollider.tag=="axis0") {
-			// 			vectorSalto +=contact.otherCollider.transform.forward;
-			// 		}
-			// 		else{
-			// 			vectorSalto -=contact.otherCollider.transform.forward;
-			// 		}
-			// 	}
-			// 	if (contact.thisCollider.tag=="axis0") {
-			// 		vectorSalto -= transform.forward;
-			// 	}
-			}
-			// rbPlayer.velocity=Vector3.zero;
-			// rbPlayer.AddForce(vectorSalto*c.relativeVelocity.magnitude+2*Vector3.up,ForceMode.Impulse);
+		// Vector3 vectorSalto=Vector3.zero;
+		// if (c.gameObject.name!="Plane") {
+		// 	foreach (ContactPoint contact in c.contacts)
+		// 	{
+		// 		print(contact.thisCollider.tag + " hit " + contact.otherCollider.tag);
+		// 		Vector3 otherVel=c.rigidbody.velocity;
+		// 		Debug.Log(c.gameObject.name+";velocidad: "+otherVel.magnitude);
+		// 		Vector3 fuerza=Vector3.zero;
+		// 		if (contact.thisCollider.tag == "axis0") {
+		// 			fuerza=Mathf.Pow(velForce,1)*-transform.forward*0.5f;
+		// 		}
+		// 		else if (contact.thisCollider.tag== "axis1" && contact.otherCollider.tag== "axis1") {
+		// 			fuerza=0*transform.forward;
+		//
+		// 		}
+		// 		else if(contact.thisCollider.tag == "axis1"){
+		// 			fuerza=Mathf.Pow(velForce,1)*c.transform.forward;
+		// 		}
+		// 		rbPlayer.velocity=Vector3.zero;
+		// 		rbPlayer.AddForce(fuerza*fuerzaGolpe+Vector3.up,ForceMode.Impulse);
+		// 		puedeMover=false;
+		// 		StartCoroutine(inmovil());
+		// 	}
+		// }
+		if(c.collider.tag == "Player"){
+			Vector3 contactPoint = c.contacts[0].point - transform.position;
+			Debug.Log("collision: "+contactPoint);
+			rbPlayer.AddForce(-contactPoint.normalized * fuerzaGolpe + transform.up, ForceMode.VelocityChange);
+			puedeMover = false;
+			StartCoroutine(inmovil());
 		}
 	}
 
