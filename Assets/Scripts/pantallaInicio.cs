@@ -48,7 +48,6 @@ public class pantallaInicio : MonoBehaviour {
 	}
 	
 	public void VerInstrucciones(){
-		Debug.Log("instrucciones");
 		CanvasPantallaTitulo.SetActive(false);
 		CanvasPantallaInstrucciones.SetActive(true);
 		volver = true;
@@ -56,6 +55,6 @@ public class pantallaInicio : MonoBehaviour {
 	}
 
 	public void SalirPartida(){
-
+		Application.Quit();
 	}
 }
