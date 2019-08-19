@@ -27,7 +27,7 @@ public class gamemanager : MonoBehaviour {
 		Time.timeScale = 1;
 		pantallaPausa.SetActive(false);
 		pantallaFinal.SetActive(false);
-		pantallaScores.SetActive(false);
+		pantallaScores.SetActive(true);
 
         for(int i = 0; i < 4; ++i)
         {
