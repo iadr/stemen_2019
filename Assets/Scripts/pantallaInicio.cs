@@ -16,7 +16,7 @@ public class pantallaInicio : MonoBehaviour {
 		CanvasPantallaInstrucciones.SetActive(false);
 		CanvasPantallaCreditos.SetActive(false);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		modelo.transform.Rotate(0,50*Time.deltaTime,0);
@@ -31,7 +31,7 @@ public class pantallaInicio : MonoBehaviour {
 	}
 
 	public void ComenzarPartida(){
-		SceneManager.LoadScene("test01");
+		SceneManager.LoadScene("ElegirCarro");
 	}
 
 	public void VerPantallaTitulo(){
@@ -46,7 +46,7 @@ public class pantallaInicio : MonoBehaviour {
 		CanvasPantallaCreditos.SetActive(true);
 		volver = true;
 	}
-	
+
 	public void VerInstrucciones(){
 		CanvasPantallaTitulo.SetActive(false);
 		CanvasPantallaInstrucciones.SetActive(true);

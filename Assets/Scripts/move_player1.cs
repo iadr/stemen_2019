@@ -110,6 +110,9 @@ public class move_player1 : MonoBehaviour {
 			if (!(vidas==0)) {
 				StartCoroutine(respawn());
 			}
+			else{
+				this.gameObject.SetActive(false);
+			}
 		}
 	}
 
