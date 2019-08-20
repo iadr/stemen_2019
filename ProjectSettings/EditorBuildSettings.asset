@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/test01.unity
     guid: 5453b4a16051126408a14e564eed33b7
+  - enabled: 1
+    path: Assets/Scenes/ElegirCarro.unity
+    guid: 0c97d272276cd8145a16241c965c02af
   m_configObjects: {}

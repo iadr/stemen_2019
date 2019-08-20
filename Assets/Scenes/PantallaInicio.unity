@@ -181,7 +181,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Israel D\xEDaz\nSebasti\xE1n Alarc\xF3n\nPaula Mancilla\n\nIsrael D\xEDaz\n\nIsrael
-    D\xEDaz\nSebasti\xE1n Alarc\xF3n\n\nPaula Mancilla"
+    D\xEDaz\nSebasti\xE1n Alarc\xF3n\nPaula Mancilla\n\nPaula Mancilla"
 --- !u!222 &83879295
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -478,7 +478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -472.99997}
+  m_AnchoredPosition: {x: 261, y: -532.59}
   m_SizeDelta: {x: 392.7, y: 315.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &217361154
@@ -558,7 +558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4.0005517, y: -953}
+  m_AnchoredPosition: {x: 7, y: -1035.9999}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &261164566
@@ -1447,7 +1447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4.0005517, y: -908}
+  m_AnchoredPosition: {x: 7, y: -990.9999}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &725764314
@@ -1816,7 +1816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4.0005517, y: -1094}
+  m_AnchoredPosition: {x: 7, y: -1176.9999}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &773404694
@@ -1966,7 +1966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4.0005517, y: -860}
+  m_AnchoredPosition: {x: 7, y: -942.9999}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &877309445
@@ -2164,7 +2164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.0000042915, y: -235.41}
+  m_AnchoredPosition: {x: 11, y: -295}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &956930234
@@ -2397,7 +2397,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Directores\n\n\n\nProductor\n\nProgramadores\n\n\nDise\xF1ador"
+  m_Text: "Directores\n\n\n\nProductor\n\nProgramadores\n\n\n\nDise\xF1ador"
 --- !u!222 &971349248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2653,7 +2653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4.0005517, y: -815}
+  m_AnchoredPosition: {x: 7, y: -898}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1400174856
@@ -2827,7 +2827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4.000552, y: -691.8899}
+  m_AnchoredPosition: {x: 6.9994516, y: -751.4799}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1418902740
@@ -2864,7 +2864,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Pree Music Archive
 
-    [Rellenar]'
+    Stack Overflow
+
+    Unity3D Scripting API
+
+'
 --- !u!222 &1418902741
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3054,7 +3058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1506170510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3824,7 +3828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4.000552, y: -646.8899}
+  m_AnchoredPosition: {x: 6.9994516, y: -706.4799}
   m_SizeDelta: {x: 150, y: 59.2}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1831811602
@@ -3967,7 +3971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -165.59998, y: -472.98996}
+  m_AnchoredPosition: {x: -154.59998, y: -532.58}
   m_SizeDelta: {x: 392.7, y: 316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025643859

@@ -54,6 +54,13 @@ public class gamemanager : MonoBehaviour {
 				HP[3].gameObject.SetActive(true);
 			}
 		}
+		
+		for(int i=0; i < 4;i++){
+			if (players[i].activeSelf) {
+				HP[i].gameObject.SetActive(true);
+			}
+		}
+
 	}
 
 	// Update is called once per frame
