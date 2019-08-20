@@ -6,6 +6,11 @@ TagManager:
   tags:
   - axis1
   - axis0
+  - 4
+  - 2
+  - 3
+  - 1
+  - Modelo
   layers:
   - Default
   - TransparentFX

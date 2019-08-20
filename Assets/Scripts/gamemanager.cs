@@ -14,6 +14,15 @@ public class gamemanager : MonoBehaviour {
 	public bool pausa;
 	private AudioSource audioSource;
 
+	public GameObject [] ganador = new GameObject[1];
+	public GameObject plano;
+	public GameObject hotdog;
+	public GameObject papas;
+	public GameObject helado;
+	public GameObject pretzel;
+	private GameObject modelo;
+	private bool bfinal = true;
+
 	// string[] names = Input.GetJoystickNames();
 
 	void Awake(){
@@ -23,11 +32,13 @@ public class gamemanager : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 	}
 	void Start () {
+		Time.timeScale = 1;
 		pausa = false;
 		Time.timeScale = 1;
 		pantallaPausa.SetActive(false);
 		pantallaFinal.SetActive(false);
 		pantallaScores.SetActive(true);
+		plano.SetActive(true);
 
         for(int i = 0; i < 4; ++i)
         {
@@ -83,6 +94,10 @@ public class gamemanager : MonoBehaviour {
 		Debug.Log(GameObject.FindGameObjectsWithTag("Player").Length);
 		if (GameObject.FindGameObjectsWithTag("Player").Length==1) {
 			Time.timeScale=0;
+			if (bfinal){
+				FinalPartida();
+				bfinal = false;
+			}
 			Debug.Log("Se acabo esto");
 			// FINALIZAR JUEGO
 		}
@@ -98,5 +113,30 @@ public class gamemanager : MonoBehaviour {
 		pantallaPausa.SetActive(false);
 		Time.timeScale = 1;
 		pausa=false;
+	}
+
+	public void FinalPartida(){
+		ganador = GameObject.FindGameObjectsWithTag("Player");
+		modelo = ganador[0].transform.GetChild(2).gameObject;
+		modelo.transform.SetParent(pantallaFinal.transform,false);
+		modelo.transform.localPosition = new Vector3(-22f,24f,-96f);
+		modelo.transform.localScale = new Vector3(300f,300f,300f);
+		modelo.transform.localRotation = Quaternion.Euler(new Vector3(1f,-100f,0f));
+		//Destroy(plano);
+		plano.SetActive(false);
+		//Destroy(ganador[0]);
+		ganador[0].SetActive(false);
+		pantallaFinal.SetActive(true);
+		pantallaScores.SetActive(false);
+		modelo.SetActive(true);
+	}
+
+	public void VolverMenuInicio(){
+		SceneManager.LoadScene("PantallaInicio");
+	}
+
+	public void NuevaPartida(){
+		Destroy(GameObject.Find("SeleccionesManager"));
+		SceneManager.LoadScene("ElegirCarro");
 	}
 }

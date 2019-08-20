@@ -25,6 +25,7 @@ public class PatallaElegir : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         carSelected = new bool[4];
         playerSelecciono = new bool[4];
         for (int i = 0; i < 4; ++i)
