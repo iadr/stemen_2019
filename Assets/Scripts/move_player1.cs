@@ -12,9 +12,9 @@ public class move_player1 : MonoBehaviour {
 	public float limite=5.05f;
 
 	[Header("Player",order=1)]
-	public float velocidad=20;
-	public int vidas=0;
-	public float fuerzaGolpe;
+	public float velocidad=100;
+	public int vidas=3;
+	public float fuerzaGolpe=5;
 	public bool puedeMover=true;
 	public bool mover=true;
 	float rcastLength;
@@ -25,6 +25,7 @@ public class move_player1 : MonoBehaviour {
 	[Header("Audio",order=2)]
 	bool playingEngine=false;
 	public AudioClip runningEngine,idle;
+	public AudioClip spawn,bump;
 	AudioSource audios;
 
 
@@ -40,8 +41,20 @@ public class move_player1 : MonoBehaviour {
 		// Debug.Log(rcastLength);
 		nombre=gameObject.name;
 		nombre=nombre.Substring(1);
-		joyX="Joy"+nombre+"X";
-		joyY="Joy"+nombre+"Y";
+		if (int.Parse(nombre)>2) {
+			if (int.Parse(nombre)==3) {
+				joyX="H2";
+				joyY="V2";
+			}
+			else{
+				joyX="H3";
+				joyY="V3";
+			}
+		}
+		else{
+			joyX="Joy"+nombre+"X";
+			joyY="Joy"+nombre+"Y";
+		}
 	}
 
 	// Update is called once per frame
@@ -52,13 +65,13 @@ public class move_player1 : MonoBehaviour {
 		if (!mover)
 			return;
 
-		  vel.z=Input.GetAxis(joyY)*Time.deltaTime*velocidad;
+		  vel.z=Input.GetAxisRaw(joyY)*Time.deltaTime*velocidad;
 		  if (vel.z !=0.0f) {
 				if (vel.z>0.0f) {
-					transform.Rotate(0,Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
+					transform.Rotate(0,Input.GetAxisRaw(joyX)*velocidad*Time.deltaTime,0);
 				}
 			  else {
-			    transform.Rotate(0,-Input.GetAxis(joyX)*velocidad*Time.deltaTime,0);
+			    transform.Rotate(0,-Input.GetAxisRaw(joyX)*velocidad*Time.deltaTime,0);
 				}
 				if (!playingEngine) {
 					playingEngine=true;
@@ -66,7 +79,7 @@ public class move_player1 : MonoBehaviour {
 				}
 		  }
 		  else{
-		    transform.Rotate(0,Input.GetAxis(joyX)*velocidad/2*Time.deltaTime,0);
+		    transform.Rotate(0,Input.GetAxisRaw(joyX)*velocidad/2*Time.deltaTime,0);
 				// rbPlayer.AddTorque(Input.GetAxis(joyX)*velocidad/2*Time.deltaTime*transform.up);
 				if (playingEngine) {
 					playingEngine=false;
@@ -94,6 +107,7 @@ public class move_player1 : MonoBehaviour {
 		yield return new WaitForSeconds(0.5f);
 		transform.position= new Vector3(Random.Range(-rango, rango), rcastLength+0.1f, Random.Range(-rango, rango));//x=z=-3.5 ~ 3.5 , y=0.255
 		transform.Rotate(0.0f,Random.Range(0, 360), 0.0f);
+		audios.PlayOneShot(spawn,1.0f);
 	}
 
 
@@ -164,6 +178,7 @@ public class move_player1 : MonoBehaviour {
 			Vector3 contactPoint = c.contacts[0].point - transform.position;
 			Debug.Log("collision: "+contactPoint);
 			rbPlayer.AddForce(-contactPoint.normalized * fuerzaGolpe + transform.up, ForceMode.VelocityChange);
+			audios.PlayOneShot(bump,1.0f);
 			puedeMover = false;
 			StartCoroutine(inmovil());
 		}

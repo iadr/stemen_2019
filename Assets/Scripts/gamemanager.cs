@@ -65,7 +65,7 @@ public class gamemanager : MonoBehaviour {
 				HP[3].gameObject.SetActive(true);
 			}
 		}
-		
+
 		for(int i=0; i < 4;i++){
 			if (players[i].activeSelf) {
 				HP[i].gameObject.SetActive(true);
@@ -76,11 +76,9 @@ public class gamemanager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		// Debug.Log(players[0].GetComponent<move_player1>().vidas);
-		HP[0].text="PLAYER1:"+players[0].GetComponent<move_player1>().vidas;
-		HP[1].text="PLAYER2:"+players[1].GetComponent<move_player1>().vidas;
-		HP[2].text="PLAYER3:"+players[2].GetComponent<move_p3>().vidas;
-		HP[3].text="PLAYER4:"+players[3].GetComponent<move_p4>().vidas;
+		for (int i=0;	 i<4; i++) {
+			HP[i].text="VIDAS PLAYER"+(i+1)+":"+players[i].GetComponent<move_player1>().vidas;
+		}
 
 
 		if(Input.GetButtonDown("Pausa")){
@@ -140,3 +138,4 @@ public class gamemanager : MonoBehaviour {
 		SceneManager.LoadScene("ElegirCarro");
 	}
 }
+		// Debug.Log(players[0].GetComponent<move_player1>().vidas);
