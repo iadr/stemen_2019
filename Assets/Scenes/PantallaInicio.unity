@@ -1213,6 +1213,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4759904154640744, guid: 4ec1340b29e800b448acf8adeff52ace,
     type: 2}
   m_PrefabInternal: {fileID: 1729335199}
+--- !u!114 &651736322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 651736320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35574d67d1eb46e4c97d269d9106a9c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &678466452
 GameObject:
   m_ObjectHideFlags: 0
